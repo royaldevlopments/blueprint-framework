@@ -1,22 +1,21 @@
 #!/bin/bash
-# Arix Compatibility Fork — adds automatic Arix Theme integration
+# Royal Blueprint — Arix-compatible fork for Royal Panel
+# Maintained by Shaurya Vashishtha — Royal Devlopments
 
 # Original: github.com/blueprintframework/framework
-# Arix fork: https://github.com/royaldevlopments/blueprint-framework
-# About Arix: https://arix.gg
+# Royal fork: https://github.com/royaldevlopments/blueprint-framework
+# Built for: Royal Panel (Pterodactyl + Arix Theme)
 
 BLUEPRINT_ENGINE="solstice"
 REPOSITORY="royaldevlopments/blueprint-framework"
-REPOSITORY_BRANCH="arix"
-VERSION="arix-1.0.0" #;
+REPOSITORY_BRANCH="main"
+VERSION="royal-1.0.0" #;
 
 FOLDER=$(realpath "$(dirname "$0" 2> /dev/null)" 2> /dev/null) || FOLDER="$BLUEPRINT__FOLDER"
 OWNERSHIP="www-data:www-data" #;
 WEBUSER="www-data" #;
 USERSHELL="/bin/bash" #;
 SHORTCUT_DIR="/usr/local/bin"
-
-# Check if the script is being sourced - and if so - load bash autocompletion.
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
   _blueprint_completions() {
     local cur cmd opts
@@ -239,6 +238,16 @@ if [[ $1 != "-bash" ]]; then
   else
     # Only run if Blueprint is not in the process of upgrading.
     if [[ $BLUEPRINT_ENVIRONMENT != "upgrade2" ]]; then
+      # Print Blueprint icon with ascii characters.
+      C0="\x1b[0m"
+      C1="\x1b[31;43;1m"
+      C2="\x1b[32;44;1m"
+      C3="\x1b[34;45;1m"
+      C3="\x1b[0;37;1m"
+      echo -e "$C0" \
+        "\n  Royal Blueprint — Royal Panel Edition" \
+        "\n  Maintained by Shaurya Vashishtha (Royal Devlopments)\n";
+
       export PROGRESS_TOTAL=15
       export PROGRESS_NOW=0
     else
@@ -271,7 +280,9 @@ if [[ $1 != "-bash" ]]; then
     fi
 
     if [[ $BLUEPRINT_ENVIRONMENT != "ci" ]]; then
+      set -eo pipefail
       yarn install
+      set +eo pipefail
     fi
 
     ((PROGRESS_NOW++))
@@ -405,8 +416,10 @@ if [[ $1 != "-bash" ]]; then
       PRINT INFO "Rebuilding panel assets.."
       hide_progress
       cd "$FOLDER" || cdhalt
+      set -eo pipefail
       rm -rf "$FOLDER/node_modules/.cache"
       yarn run build:production --progress
+      set +eo pipefail
     fi
 
     ((PROGRESS_NOW++))

@@ -1,28 +1,40 @@
-# Arix Theme — Blueprint Framework Fork
+# Royal Blueprint 🚀
 
-## Introduction
-**Arix Theme** is a customized fork of the Blueprint extension framework for Pterodactyl, tailored for seamless integration with the [Arix Theme](https://arix.gg). This fork adds automatic compatibility with Arix and maintains the powerful extension system Blueprint is known for.
+**Blueprint Framework fork** — specially built for **Royal Panel** by **Shaurya Vashishtha (Royal Devlopments)**.
 
-### Install
-Refer to the [installation guide](https://github.com/royaldevlopments/blueprint-framework).
+## What is this?
 
-<br>
+A fully Arix Theme-compatible version of Blueprint Framework. Install extensions on your Pterodactyl/Royal Panel without breaking your Arix theme.
 
-## What's in here?
-This repository hosts the framework patch that you apply onto your Pterodactyl panel. This overwrites files like installing a "standalone addon" would, but instead of being just that, the framework allows your panel to be extended through "extensions".
+## Features
 
-- The CLI is written in Bash.
-- The backend adds onto Pterodactyl's, and is written in PHP/Laravel.
-- The user-side frontend adds onto Pterodactyl's, and is written in React/TypeScript.
-- The admin-side frontend adds onto Pterodactyl's, and is written in PHP/Laravel/Blade.
+- ✅ **Arix Theme auto-detection** — detects Arix during install
+- ✅ **Zero manual merging** — restores Arix React components, templates, and config automatically
+- ✅ **Blueprint directives auto-merged** — all `@include`/`@yield` directives added to Arix templates
+- ✅ **All Blueprint extensions work** — install/uninstall extensions normally
+- ✅ **No branding conflicts** — clean integration with Royal Panel
 
-### CLI
-Our main CLI script is [`blueprint.sh`](./blueprint.sh). This script gets called by `/usr/local/bin/blueprint` whenever a user runs the `blueprint` command, or queries bash autocomplete.
+## Installation
 
-[`blueprint.sh`](./blueprint.sh) is in charge of the following duties;
-- Finishing initial installation steps and updates (flushing cache, artisan commands, etc)
-- Sourcing CLI dependencies ([`scripts/libraries`](./scripts/libraries))
-- Running the right sub-scripts for each command ([`scripts/commands`](./scripts/commands))
-- Placing the `blueprint` command shortcut to `/usr/local/bin/blueprint`
+```bash
+# Extract release over your panel root
+unzip release.zip -d /var/www/pterodactyl
 
-<br>
+# Run installer
+bash blueprint.sh
+```
+
+The installer automatically handles Arix compatibility. No manual file merging needed.
+
+## Requirements
+
+- Pterodactyl/Royal Panel with Arix Theme v2.x installed
+- PHP 8.0+, Node 22+, MariaDB/MySQL
+
+## Maintainer
+
+**Shaurya Vashishtha** — Royal Devlopments
+
+---
+
+*Based on Blueprint Framework — modified for Royal Panel compatibility*
