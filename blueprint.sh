@@ -1,8 +1,6 @@
 #!/bin/bash
-# © 2023-2026 Emma (prpl.wtf) — Blueprint Framework
 # Arix Compatibility Fork — adds automatic Arix Theme integration
 
-# Learn more @ blueprint.zip
 # Original: github.com/blueprintframework/framework
 # Arix fork: https://github.com/royaldevlopments/blueprint-framework
 # About Arix: https://arix.gg
@@ -241,17 +239,6 @@ if [[ $1 != "-bash" ]]; then
   else
     # Only run if Blueprint is not in the process of upgrading.
     if [[ $BLUEPRINT_ENVIRONMENT != "upgrade2" ]]; then
-      # Print Blueprint icon with ascii characters.
-      C0="\x1b[0m"
-      C1="\x1b[31;43;1m"
-      C2="\x1b[32;44;1m"
-      C3="\x1b[34;45;1m"
-      C3="\x1b[0;37;1m"
-      echo -e "$C0" \
-        "\n$C4  ██$C1▌$C2▌$C3▌$C0   Blueprint Framework" \
-        "\n$C4██  ██$C1▌$C2▌$C3▌$C0 https://blueprint.zip" \
-        "\n$C4  ████$C1▌$C2▌$C3▌$C0 © 2023-2026 Emma (prpl.wtf)\n";
-
       export PROGRESS_TOTAL=15
       export PROGRESS_NOW=0
     else
@@ -284,9 +271,7 @@ if [[ $1 != "-bash" ]]; then
     fi
 
     if [[ $BLUEPRINT_ENVIRONMENT != "ci" ]]; then
-      set -eo pipefail
       yarn install
-      set +eo pipefail
     fi
 
     ((PROGRESS_NOW++))
@@ -420,10 +405,8 @@ if [[ $1 != "-bash" ]]; then
       PRINT INFO "Rebuilding panel assets.."
       hide_progress
       cd "$FOLDER" || cdhalt
-      set -eo pipefail
       rm -rf "$FOLDER/node_modules/.cache"
       yarn run build:production --progress
-      set +eo pipefail
     fi
 
     ((PROGRESS_NOW++))

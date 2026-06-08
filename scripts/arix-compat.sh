@@ -57,7 +57,7 @@ restore_arix_scripts() {
 
   if [ -d "$src/resources/scripts" ]; then
     PRINT INFO "Restoring Arix React components..."
-    rsync -a --delete "$src/resources/scripts/" "$FOLDER/resources/scripts/"
+    rsync -a "$src/resources/scripts/" "$FOLDER/resources/scripts/"
   fi
 }
 
